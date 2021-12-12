@@ -1,4 +1,4 @@
-export default class Food {
+class Food {
   element: HTMLElement;
   constructor() {
     this.element = document.getElementById("food") as HTMLElement;
@@ -17,3 +17,4 @@ export default class Food {
     this.element.style.top = `${newY}px`;
   }
 }
+export default Food;
