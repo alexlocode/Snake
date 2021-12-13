@@ -52,7 +52,6 @@ class gameControl {
       this.isLive = false;
       alert(e.message);
     }
-
     this.isLive &&
       setTimeout(this.run.bind(this), 300 - (this.csorePanel.level - 1) * 30);
   }

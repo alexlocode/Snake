@@ -18,9 +18,12 @@ class Food {
   changePosition(): void {
     const newX = Math.floor(Math.random() * 30) * 10;
     const newY = Math.floor(Math.random() * 30) * 10;
-
     this.element.style.left = `${newX}px`;
     this.element.style.top = `${newY}px`;
+    this._position = {
+      x: newX,
+      y: newY,
+    };
   }
 }
 export default Food;

@@ -19,12 +19,23 @@ class Snake {
     if (value.x < 0 || value.x > 290 || value.y < 0 || value.y > 290) {
       throw new Error("撞牆了");
     }
+    this.moveBody();
     this.head.style.left = `${value.x}px`;
     this.head.style.top = `${value.y}px`;
   }
-  addBody() {
-    const div = document.createElement("div");
-    this.bodiesContent.insertAdjacentElement("beforeend", div);
+  addBody(): void {
+    this.bodiesContent.insertAdjacentHTML("beforeend", "<div></div>");
+    
+  }
+  moveBody(): void {
+    console.log(this.bodies.length);
+    
+    for (let i = this.bodies.length - 1; i > 0; i--) {
+      const x: number = (this.bodies[i - 1] as HTMLElement).offsetLeft;
+      const y: number = (this.bodies[i - 1] as HTMLElement).offsetTop;
+      (this.bodies[i] as HTMLElement).style.left = x + "px";
+      (this.bodies[i] as HTMLElement).style.top = y + "px";
+    }
   }
 }
 
