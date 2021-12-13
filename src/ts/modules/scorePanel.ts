@@ -1,6 +1,6 @@
 class ScorePanel {
   private score: number = 0;
-  private level: number = 1;
+  private _level: number = 1;
   private maxLevel: number;
   private upScore: number;
   private scoreElement: HTMLElement;
@@ -11,6 +11,9 @@ class ScorePanel {
     this.scoreElement = document.getElementById("score") as HTMLElement;
     this.levelElement = document.getElementById("level") as HTMLElement;
   }
+  get level() {
+    return this._level;
+  }
   addScore(): void {
     this.score++;
     this.scoreElement.innerHTML = this.score.toString();
@@ -19,9 +22,9 @@ class ScorePanel {
     }
   }
   private levelUp(): void {
-    if (this.level < this.maxLevel) {
-      this.level++;
-      this.levelElement.innerHTML = this.level.toString();
+    if (this._level < this.maxLevel) {
+      this._level++;
+      this.levelElement.innerHTML = this._level.toString();
     }
   }
 }

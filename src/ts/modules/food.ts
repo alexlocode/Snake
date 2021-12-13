@@ -1,13 +1,19 @@
+interface Pos {
+  x: number;
+  y: number;
+}
 class Food {
-  element: HTMLElement;
+  private element: HTMLElement;
+  private _position: Pos;
   constructor() {
     this.element = document.getElementById("food") as HTMLElement;
-  }
-  get position(): object {
-    return {
+    this._position = {
       x: this.element.offsetLeft,
       y: this.element.offsetTop,
     };
+  }
+  get position(): Pos {
+    return this._position;
   }
   changePosition(): void {
     const newX = Math.floor(Math.random() * 30) * 10;
