@@ -12,6 +12,7 @@ class gameControl {
   private food: Food;
   private csorePanel: CsorePanel;
   private direction: string = "";
+  private lastDirection: string = "";
   private isLive: boolean = true;
 
   constructor() {
@@ -32,20 +33,21 @@ class gameControl {
     let pos: Pos = this.snake.position;
     switch (this.direction) {
       case "ArrowUp":
-        pos.y -= 10;
+        pos.y -= this.checkReTurn("ArrowDown");
         break;
       case "ArrowDown":
-        pos.y += 10;
+        pos.y += this.checkReTurn("ArrowUp");
         break;
       case "ArrowLeft":
-        pos.x -= 10;
+        pos.x -= this.checkReTurn("ArrowRight");
         break;
       case "ArrowRight":
-        pos.x += 10;
+        pos.x += this.checkReTurn("ArrowLeft");
         break;
     }
 
     this.checkCollision(pos);
+
     try {
       this.snake.position = pos;
     } catch (e) {
@@ -64,6 +66,13 @@ class gameControl {
       this.csorePanel.addScore();
       this.snake.addBody();
     }
+  }
+  checkReTurn(checkVal: string): number {
+    //  檢查是否回頭
+    if (this.lastDirection !== checkVal) {
+      this.lastDirection = this.direction;
+    }
+    return this.snake.bodies[1] && this.lastDirection === checkVal ? -10 : 10;
   }
 }
 

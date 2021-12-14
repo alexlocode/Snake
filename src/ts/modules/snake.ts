@@ -1,12 +1,12 @@
 class Snake {
   private head: HTMLElement;
   private bodiesContent: HTMLElement;
-  private bodies: HTMLCollection;
+  private _bodies: HTMLCollection;
   private _position: Pos;
   constructor() {
     this.head = document.querySelector("#snake > div") as HTMLElement;
     this.bodiesContent = document.getElementById("snake") as HTMLElement;
-    this.bodies = this.bodiesContent.getElementsByTagName("div");
+    this._bodies = this.bodiesContent.getElementsByTagName("div");
     this._position = {
       x: this.head.offsetLeft,
       y: this.head.offsetTop,
@@ -23,15 +23,18 @@ class Snake {
     this.head.style.left = `${value.x}px`;
     this.head.style.top = `${value.y}px`;
   }
+  get bodies() {
+    return this._bodies;
+  }
   addBody(): void {
     this.bodiesContent.insertAdjacentHTML("beforeend", "<div></div>");
   }
   moveBody(): void {
-    for (let i = this.bodies.length - 1; i > 0; i--) {
-      const x: number = (this.bodies[i - 1] as HTMLElement).offsetLeft;
-      const y: number = (this.bodies[i - 1] as HTMLElement).offsetTop;
-      (this.bodies[i] as HTMLElement).style.left = x + "px";
-      (this.bodies[i] as HTMLElement).style.top = y + "px";
+    for (let i = this._bodies.length - 1; i > 0; i--) {
+      const x: number = (this._bodies[i - 1] as HTMLElement).offsetLeft;
+      const y: number = (this._bodies[i - 1] as HTMLElement).offsetTop;
+      (this._bodies[i] as HTMLElement).style.left = x + "px";
+      (this._bodies[i] as HTMLElement).style.top = y + "px";
     }
   }
 }
