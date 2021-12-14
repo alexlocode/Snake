@@ -22,6 +22,7 @@ class Snake {
     this.moveBody();
     this.head.style.left = `${value.x}px`;
     this.head.style.top = `${value.y}px`;
+    this.checkSelfCollision();
   }
   get bodies() {
     return this._bodies;
@@ -35,6 +36,18 @@ class Snake {
       const y: number = (this._bodies[i - 1] as HTMLElement).offsetTop;
       (this._bodies[i] as HTMLElement).style.left = x + "px";
       (this._bodies[i] as HTMLElement).style.top = y + "px";
+    }
+  }
+  checkSelfCollision():void {
+    //  檢查自我碰撞
+    for (let i = 1; i < this.bodies.length; i++) {
+      let bd = this._bodies[i] as HTMLElement;
+      if (
+        this.position.x === bd.offsetLeft &&
+        this.position.y === bd.offsetTop
+      ) {
+        throw new Error("GAME OVER! 撞到自己了");
+      }
     }
   }
 }
