@@ -25,11 +25,8 @@ class Snake {
   }
   addBody(): void {
     this.bodiesContent.insertAdjacentHTML("beforeend", "<div></div>");
-    
   }
   moveBody(): void {
-    console.log(this.bodies.length);
-    
     for (let i = this.bodies.length - 1; i > 0; i--) {
       const x: number = (this.bodies[i - 1] as HTMLElement).offsetLeft;
       const y: number = (this.bodies[i - 1] as HTMLElement).offsetTop;
