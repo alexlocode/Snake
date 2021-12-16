@@ -24,6 +24,7 @@ class gameControl {
 
   init(): void {
     document.addEventListener("keydown", this.keydownHandle.bind(this));
+    this.food.changePosition();
     this.run();
   }
   keydownHandle(event: KeyboardEvent) {
